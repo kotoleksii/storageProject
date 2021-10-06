@@ -6,3 +6,8 @@
 table {
   width: 100%;
 }
+
+.add-button {
+  position: absolute;
+  right: 15px;
+}
