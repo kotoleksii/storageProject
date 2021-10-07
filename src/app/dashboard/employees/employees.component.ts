@@ -10,17 +10,19 @@ import {MatPaginator} from "@angular/material/paginator";
 export class EmployeesComponent implements OnInit, AfterViewInit {
 
   displayedColumns = ['id', 'fullName', 'post', 'salary'];
-  dataSource: MatTableDataSource<any> | any;
+  public dataSource: MatTableDataSource<any> | any;
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.dataSource = new MatTableDataSource<any>(EMPLOYEE_DATA);
+    this.dataSource.paginator = this.paginator;
   }
 
   ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource<EmployeeItem>(EMPLOYEE_DATA);
+    this.dataSource = new MatTableDataSource<any>(EMPLOYEE_DATA);
     this.dataSource.paginator = this.paginator;
   }
 }
@@ -33,10 +35,10 @@ export interface EmployeeItem {
 }
 
 const EMPLOYEE_DATA: EmployeeItem[] = [
-  {id: 1, fullName: 'Kot Oleksii', post: 'programmer', salary: 1200},
-  {id: 2, fullName: 'Rostyslav Kusch', post: 'programmer', salary: 1000},
-  {id: 3, fullName: 'Victor Monakhov', post: 'programmer', salary: 1200},
-  {id: 4, fullName: 'Valerii Monakhov', post: 'programmer', salary: 1200},
+  {id: 1, fullName: 'Test1 Test1', post: 'programmer', salary: 1200},
+  {id: 2, fullName: 'Test2 Test2', post: 'programmer', salary: 1000},
+  {id: 3, fullName: 'Test4 Test3', post: 'programmer', salary: 1200},
+  {id: 4, fullName: 'Test4 Test4', post: 'programmer', salary: 1200},
   {id: 5, fullName: 'Employee Test', post: 'test', salary: 500},
   {id: 6, fullName: 'Bruce Willis', post: 'hard nut', salary: 800},
   {id: 7, fullName: 'Employee Test', post: 'programmer', salary: 800},

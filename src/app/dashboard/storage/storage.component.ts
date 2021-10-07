@@ -40,6 +40,9 @@ export class StorageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.dataSource = new MatTableDataSource<StorageItem>(STORAGE_DATA);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngAfterViewInit() {
