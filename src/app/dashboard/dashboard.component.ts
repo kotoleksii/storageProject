@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
         index: 1
       }
     ];
-    this.userData = JSON.parse(<string>localStorage.getItem("user"));
+    // this.userData = JSON.parse(<string>localStorage.getItem("user"));
   }
 
   ngOnInit(): void {

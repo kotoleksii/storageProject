@@ -10,9 +10,14 @@
       width: 100%;
     }
   }
+
   .add-button {
     position: absolute;
     bottom: 25px;
     right: 30px;
+  }
+
+  .mat-icon {
+    cursor: pointer;
   }
 }

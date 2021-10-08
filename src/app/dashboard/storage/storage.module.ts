@@ -9,6 +9,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {StorageRoutingModule} from "./storage-routing.module";
+import {AddModalModule} from "../../shared/components/add-modal/add-modal.module";
 
 
 
@@ -24,6 +25,7 @@ import {StorageRoutingModule} from "./storage-routing.module";
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    AddModalModule
   ],
   providers: [
     {provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl}

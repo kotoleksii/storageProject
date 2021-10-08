@@ -3,6 +3,10 @@ import {Subject} from "rxjs";
 import {MatPaginator, MatPaginatorIntl} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
+import {DashboardService} from "../dashboard.service";
+import {IStorage} from "../../shared/interfaces/interfaces";
+import {MatDialog} from "@angular/material/dialog";
+import {AddModalComponent} from "../../shared/components/add-modal/add-modal.component";
 
 export class MyCustomPaginatorIntl implements MatPaginatorIntl {
   changes = new Subject<void>();
@@ -30,34 +34,62 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
 })
 export class StorageComponent implements OnInit, AfterViewInit {
 
-  displayedColumns = ['id', 'title', 'count', 'seller'];
-  dataSource: MatTableDataSource<any> | any;
+  // public displayedColumns = ['id', 'title', 'count', 'seller'];
+  // dataSource: MatTableDataSource<any> | any;
+  public displayedColumns = ['id', 'name', 'count', 'provider', 'actions'];
+  public dataSource: IStorage[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
   @ViewChild(MatSort) sort: MatSort | undefined;
 
-  constructor() {
+  constructor(private dashboardService: DashboardService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<StorageItem>(STORAGE_DATA);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.getAndSetStorageItems();
+    // this.dataSource = new MatTableDataSource<StorageItem>(STORAGE_DATA);
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+  }
+
+  public getAndSetStorageItems(): void {
+    this.dashboardService.getStorageItems().subscribe((res: IStorage[]) => {
+      this.dataSource = res;
+    });
+  }
+
+  public deleteStorageItem(id: number): void {
+    this.dashboardService.removeStorageItem(id).subscribe(res => {
+      this.dataSource = res;
+    })
+  }
+
+  public openDialog(method: string, dataToEdit?: any): void {
+    const dialogRef = this.dialog.open(AddModalComponent, {
+      data: {
+        method: method,
+        initialValue: dataToEdit,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAndSetStorageItems();
+    });
   }
 
   ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource<StorageItem>(STORAGE_DATA);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    // this.dataSource = new MatTableDataSource<StorageItem>(STORAGE_DATA);
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    // const filterValue = (event.target as HTMLInputElement).value;
+    // this.dataSource.filter = filterValue.trim().toLowerCase();
+    //
+    // if (this.dataSource.paginator) {
+    //   this.dataSource.paginator.firstPage();
+    // }
   }
 
 }

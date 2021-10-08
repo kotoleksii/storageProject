@@ -8,7 +8,7 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {NotifierModule} from "angular-notifier";
 import {ReactiveFormsModule} from "@angular/forms";
 import {SampleDialogComponent} from './sample-dialog/sample-dialog.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatCardModule} from "@angular/material/card";
 import {MatExpansionModule} from "@angular/material/expansion";
@@ -17,6 +17,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {AppRoutingModule} from "./app-routing.module";
 import {RouterModule} from "@angular/router";
+import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
 
 
 @NgModule({
@@ -49,8 +50,16 @@ import {RouterModule} from "@angular/router";
     MatExpansionModule,
     HttpClientModule,
     MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
