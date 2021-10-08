@@ -5,14 +5,14 @@ import {NotifierService} from "angular-notifier";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
-  public name: string = '';
+  public login: string = '';
   public password: string = '';
-  public keyObj = {
-    name: 'admin',
+  public obj = {
+    login: 'admin',
     password: 'admin',
   }
 
@@ -22,17 +22,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public login(): void {
-    if (this.keyObj.name === this.name && this.keyObj.password === this.password) {
+  public checkLogin(): void {
+    if (this.obj.login === this.login && this.obj.password === this.password) {
       localStorage.setItem('token', 'auth_token');
-      localStorage.setItem('userName', this.keyObj.name);
-      this.name = '';
-      this.password = '';
-      this.router.navigate(['dashboard']);
+      localStorage.setItem('user', JSON.stringify({name: this.login}));
+      this.notifierService.notify('success', 'bingo!');
+      this.router.navigate(['dashboard', 'storage']);
     } else {
-      this.name = '';
-      this.password = '';
       this.notifierService.notify('error', 'wrong data!');
+      this.login = '';
+      this.password = '';
     }
   }
 

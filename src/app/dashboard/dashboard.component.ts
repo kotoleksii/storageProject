@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
         index: 1
       }
     ];
-    this.userData = localStorage.getItem("userName");
+    this.userData = JSON.parse(<string>localStorage.getItem("user"));
   }
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
 
   public logout(): void {
     localStorage.clear();
-    window.location.reload();
+    this.router.navigate(['login']);
   }
 
 }

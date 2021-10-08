@@ -1,17 +1,40 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
+import {MatPaginator, MatPaginatorIntl} from "@angular/material/paginator";
+import {Subject} from "rxjs";
+import {MatSort} from "@angular/material/sort";
+
+export class MyCustomPaginatorIntl implements MatPaginatorIntl {
+  changes = new Subject<void>();
+
+  firstPageLabel = `First page`;
+  itemsPerPageLabel = `Items per page:`;
+  lastPageLabel = `Last page`;
+
+  nextPageLabel = 'Next page';
+  previousPageLabel = 'Previous page';
+
+  getRangeLabel(page: number, pageSize: number, length: number): string {
+    if (length === 0) {
+      return `Page 1 of 1`;
+    }
+    const amountPages = Math.ceil(length / pageSize);
+    return `Page ${page + 1} of ${amountPages}`;
+  }
+}
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
-  styleUrls: ['./employees.component.css']
+  styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit, AfterViewInit {
 
   displayedColumns = ['id', 'fullName', 'post', 'salary'];
   public dataSource: MatTableDataSource<any> | any;
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
+  @ViewChild(MatSort) sort: MatSort | undefined;
+
 
   constructor() {
   }
@@ -19,11 +42,22 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>(EMPLOYEE_DATA);
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngAfterViewInit() {
     this.dataSource = new MatTableDataSource<any>(EMPLOYEE_DATA);
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }
 

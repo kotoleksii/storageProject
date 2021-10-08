@@ -26,7 +26,7 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
 @Component({
   selector: 'app-storage',
   templateUrl: './storage.component.html',
-  styleUrls: ['./storage.component.css']
+  styleUrls: ['./storage.component.scss']
 })
 export class StorageComponent implements OnInit, AfterViewInit {
 

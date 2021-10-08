@@ -1,11 +1,4 @@
-.center {
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
-
-.logout {
-  position: absolute;
-  top: 0px;
-  right: 15px;
+.dashboard-nav {
+  display: flex;
+  justify-content: space-between;
 }
