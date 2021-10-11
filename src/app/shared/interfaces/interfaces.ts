@@ -4,3 +4,10 @@ export interface IStorage{
   count: number;
   provider: string;
 }
+
+export interface IEmployee {
+  id: number;
+  fio: string;
+  position: string;
+  salary: number;
+}

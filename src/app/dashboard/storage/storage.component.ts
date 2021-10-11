@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Subject} from "rxjs";
 import {MatPaginator, MatPaginatorIntl} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {DashboardService} from "../dashboard.service";
 import {IStorage} from "../../shared/interfaces/interfaces";
@@ -39,8 +38,8 @@ export class StorageComponent implements OnInit, AfterViewInit {
   public displayedColumns = ['id', 'name', 'count', 'provider', 'actions'];
   public dataSource: IStorage[] = [];
 
-  // @ViewChild(MatPaginator) paginator: MatPaginator | any;
-  // @ViewChild(MatSort) sort: MatSort | undefined;
+  @ViewChild(MatPaginator) paginator: MatPaginator | any;
+  @ViewChild(MatSort) sort: MatSort | undefined;
 
   constructor(private dashboardService: DashboardService, public dialog: MatDialog) {
   }
@@ -54,7 +53,7 @@ export class StorageComponent implements OnInit, AfterViewInit {
 
   public getAndSetStorageItems(): void {
     this.dashboardService.getStorageItems().subscribe((res: IStorage[]) => {
-      return this.dataSource = res;
+      this.dataSource = res;
     });
   }
 
@@ -94,22 +93,22 @@ export class StorageComponent implements OnInit, AfterViewInit {
 
 }
 
-export interface StorageItem {
-  id: number;
-  title: string;
-  count: number;
-  seller: string;
-}
-
-const STORAGE_DATA: StorageItem[] = [
-  {id: 1, title: 'scooter', count: 33, seller: 'Rozetka'},
-  {id: 2, title: 'scooter', count: 33, seller: 'Rozetka'},
-  {id: 3, title: 'scooter', count: 33, seller: 'Rozetka'},
-  {id: 4, title: 'scooter', count: 33, seller: 'Brain'},
-  {id: 5, title: 'scooter', count: 33, seller: 'Rozetka'},
-  {id: 6, title: 'scooter', count: 33, seller: 'Rozetka'},
-  {id: 7, title: 'scooter', count: 33, seller: 'Allo'},
-  {id: 8, title: 'scooter', count: 33, seller: 'Rozetka'},
-  {id: 9, title: 'scooter', count: 33, seller: 'Rozetka'},
-  {id: 10, title: 'scooter', count: 33, seller: 'Rozetka'},
-];
+// export interface StorageItem {
+//   id: number;
+//   title: string;
+//   count: number;
+//   seller: string;
+// }
+//
+// const STORAGE_DATA: StorageItem[] = [
+//   {id: 1, title: 'scooter', count: 33, seller: 'Rozetka'},
+//   {id: 2, title: 'scooter', count: 33, seller: 'Rozetka'},
+//   {id: 3, title: 'scooter', count: 33, seller: 'Rozetka'},
+//   {id: 4, title: 'scooter', count: 33, seller: 'Brain'},
+//   {id: 5, title: 'scooter', count: 33, seller: 'Rozetka'},
+//   {id: 6, title: 'scooter', count: 33, seller: 'Rozetka'},
+//   {id: 7, title: 'scooter', count: 33, seller: 'Allo'},
+//   {id: 8, title: 'scooter', count: 33, seller: 'Rozetka'},
+//   {id: 9, title: 'scooter', count: 33, seller: 'Rozetka'},
+//   {id: 10, title: 'scooter', count: 33, seller: 'Rozetka'},
+// ];

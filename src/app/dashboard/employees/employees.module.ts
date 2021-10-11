@@ -9,6 +9,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
+import {AddModalEmployeeModule} from "../../shared/components/add-modal-employee/add-modal-employee.module";
 
 
 
@@ -24,6 +25,7 @@ import {MatButtonModule} from "@angular/material/button";
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    AddModalEmployeeModule,
   ]
 })
 export class EmployeesModule {

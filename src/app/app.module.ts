@@ -19,7 +19,6 @@ import {AppRoutingModule} from "./app-routing.module";
 import {RouterModule} from "@angular/router";
 import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
 
-
 @NgModule({
   declarations: [
     AppComponent,
