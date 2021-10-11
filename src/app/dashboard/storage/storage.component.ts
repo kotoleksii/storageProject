@@ -6,6 +6,7 @@ import {DashboardService} from "../dashboard.service";
 import {IStorage} from "../../shared/interfaces/interfaces";
 import {MatDialog} from "@angular/material/dialog";
 import {AddModalComponent} from "../../shared/components/add-modal/add-modal.component";
+import {MatTableDataSource} from "@angular/material/table";
 
 export class MyCustomPaginatorIntl implements MatPaginatorIntl {
   changes = new Subject<void>();
@@ -34,9 +35,9 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
 export class StorageComponent implements OnInit, AfterViewInit {
 
   // public displayedColumns = ['id', 'title', 'count', 'seller'];
-  // dataSource: MatTableDataSource<any> | any;
+  dataSource: MatTableDataSource<any> | any;
   public displayedColumns = ['id', 'name', 'count', 'provider', 'actions'];
-  public dataSource: IStorage[] = [];
+  // public dataSource: IStorage[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
   @ViewChild(MatSort) sort: MatSort | undefined;
@@ -46,14 +47,16 @@ export class StorageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getAndSetStorageItems();
-    // this.dataSource = new MatTableDataSource<StorageItem>(STORAGE_DATA);
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
   }
 
   public getAndSetStorageItems(): void {
     this.dashboardService.getStorageItems().subscribe((res: IStorage[]) => {
       this.dataSource = res;
+
+      const STORAGE_DATA = res;
+      this.dataSource = new MatTableDataSource<any>(STORAGE_DATA);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 
@@ -83,12 +86,12 @@ export class StorageComponent implements OnInit, AfterViewInit {
   }
 
   applyFilter(event: Event) {
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
-    //
-    // if (this.dataSource.paginator) {
-    //   this.dataSource.paginator.firstPage();
-    // }
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 }

@@ -35,8 +35,8 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
 export class EmployeesComponent implements OnInit, AfterViewInit {
 
   displayedColumns = ['id', 'fio', 'position', 'salary', 'actions'];
-  public dataSource: IEmployee[] = [];
-  // public dataSource: MatTableDataSource<any> | any;
+  //public dataSource: IEmployee[] = [];
+  public dataSource: MatTableDataSource<any> | any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
   @ViewChild(MatSort) sort: MatSort | undefined;
@@ -52,6 +52,10 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
   public getAndSetEmployeeItems(): void {
     this.dashboardService.getEmployeeItems().subscribe((res: IEmployee[]) => {
       this.dataSource = res;
+      const EMPLOYEE_DATA = res;
+      this.dataSource = new MatTableDataSource<any>(EMPLOYEE_DATA);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 
@@ -81,12 +85,12 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
   }
 
   applyFilter(event: Event) {
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
-    //
-    // if (this.dataSource.paginator) {
-    //   this.dataSource.paginator.firstPage();
-    // }
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }
 
