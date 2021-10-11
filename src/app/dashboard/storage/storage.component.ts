@@ -39,8 +39,8 @@ export class StorageComponent implements OnInit, AfterViewInit {
   public displayedColumns = ['id', 'name', 'count', 'provider', 'actions'];
   public dataSource: IStorage[] = [];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | any;
-  @ViewChild(MatSort) sort: MatSort | undefined;
+  // @ViewChild(MatPaginator) paginator: MatPaginator | any;
+  // @ViewChild(MatSort) sort: MatSort | undefined;
 
   constructor(private dashboardService: DashboardService, public dialog: MatDialog) {
   }
@@ -54,7 +54,7 @@ export class StorageComponent implements OnInit, AfterViewInit {
 
   public getAndSetStorageItems(): void {
     this.dashboardService.getStorageItems().subscribe((res: IStorage[]) => {
-      this.dataSource = res;
+      return this.dataSource = res;
     });
   }
 

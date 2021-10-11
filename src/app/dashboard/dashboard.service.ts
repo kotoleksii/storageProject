@@ -12,18 +12,18 @@ export class DashboardService {
   }
 
   public getStorageItems(): Observable<IStorage[]> {
-    return this.http.get<IStorage[]>('http://db0e-192-162-140-67.ngrok.io/storage');
+    return this.http.get<IStorage[]>('http://6f36-192-162-140-67.ngrok.io/storage');
   }
 
   public addStorageItem(body: any): Observable<any> {
-    return this.http.post('http://db0e-192-162-140-67.ngrok.io/storage', body);
+    return this.http.post('http://6f36-192-162-140-67.ngrok.io/storage', body);
   }
 
   public editStorageItem(id: number, body: any): Observable<any> {
-    return this.http.patch('http://db0e-192-162-140-67.ngrok.io/storage/' + id, body);
+    return this.http.patch('http://6f36-192-162-140-67.ngrok.io/storage/' + id, body);
   }
 
   public removeStorageItem(id: number): Observable<any> {
-    return this.http.delete<any>('http://db0e-192-162-140-67.ngrok.io/storage/' + id);
+    return this.http.delete<any>('http://6f36-192-162-140-67.ngrok.io/storage/' + id);
   }
 }

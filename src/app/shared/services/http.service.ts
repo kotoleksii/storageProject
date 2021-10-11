@@ -14,6 +14,6 @@ export class HttpService {
   }
 
   public login(body: any): Observable<any>{
-    return this.http.post('http://db0e-192-162-140-67.ngrok.io/auth/login', body);
+    return this.http.post('http://6f36-192-162-140-67.ngrok.io/auth/login', body);
   }
 }

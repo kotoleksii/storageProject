@@ -1,13 +1,13 @@
 <div class="storage-page-wrapper">
-  <mat-form-field appearance="standard">
-    <mat-label>Filter</mat-label>
-    <label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="ok, write text" #input>
-    </label>
-  </mat-form-field>
+<!--  <mat-form-field appearance="standard">-->
+<!--    <mat-label>Filter</mat-label>-->
+<!--    <label>-->
+<!--      <input matInput (keyup)="applyFilter($event)" placeholder="ok, write text" #input>-->
+<!--    </label>-->
+<!--  </mat-form-field>-->
 
-  <div class="storage-table-container">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+  <div class="storage-table-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
 
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>

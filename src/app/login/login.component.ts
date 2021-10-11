@@ -26,24 +26,25 @@ export class LoginComponent implements OnInit {
   }
 
   public checkLogin(): void {
-    // if (this.obj.login === this.login && this.obj.password === this.password) {
-    //   localStorage.setItem('token', 'auth_token');
-    //   localStorage.setItem('user', JSON.stringify({name: this.login}));
-    //   this.notifierService.notify('success', 'bingo!');
-    //   this.router.navigate(['dashboard', 'storage']);
-    // } else {
-    //   this.notifierService.notify('error', 'wrong data!');
-    //   this.login = '';
-    //   this.password = '';
-    // }
+    if (this.obj.login === this.login && this.obj.password === this.password) {
+      // localStorage.setItem('token', 'auth_token');
+      localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjMzNjI4OTQ0fQ.6o2SC-SvWQhC1d6i77mVkIMvpK8zgsLcq6iBAoFbEQI');
+      localStorage.setItem('user', JSON.stringify({name: this.login}));
+      this.notifierService.notify('success', 'bingo!');
+      this.router.navigate(['dashboard', 'storage']);
+    } else {
+      this.notifierService.notify('error', 'wrong data!');
+      this.login = '';
+      this.password = '';
+    }
 
-    this.httpService.login({email: this.login, password: this.password}).subscribe(res => {
-      if (res.token) {
-        localStorage.setItem('token', res.token);
-        this.notifierService.notify('success', 'bingo!');
-        this.router.navigate(['dashboard', 'storage']);
-      }
-    })
+    // this.httpService.login({email: this.login, password: this.password}).subscribe(res => {
+    //   if (res.token) {
+    //     localStorage.setItem('token', res.token);
+    //     this.notifierService.notify('success', 'bingo!');
+    //     this.router.navigate(['dashboard', 'storage']);
+    //   }
+    // })
 
   }
 
